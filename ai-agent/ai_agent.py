@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 
 
-template = """
+step_by_step_template = """
 You are an AI assisstant with expertise in organizing tasks based on task prioritation.
 You will be provided a list of tasks with the goal of organizing the list based on priority.
 To create this list use a combination of the provided context and these steps. Make sure to follow each and every step in order not skipping one.
@@ -30,6 +30,21 @@ Steps:
 Question: {question}
 
 Answer: 
+"""
+
+template = """
+You are an AI assistant whos goal will be to craft a balanced to-do list that will be achieveable within a 24 hour time window. 
+Based on the tasks given to you suggest a balanced to-do list that balances each activity effectively, taking into consideration any priorities or constraints given if applicable.
+Make sure to give timeslot assignments to each task. Assume that the day will start at 9am and end at 9pm.
+On this list only include tasks that were given only do not add any of your own nor any breaks.
+When you return back your schedule only give the schedule.
+
+Here is the conversational history: {context}
+
+Question: {question}
+
+Answer: 
+
 """
 
 model = OllamaLLM(model="llama3.2") 
