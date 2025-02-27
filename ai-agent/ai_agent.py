@@ -35,9 +35,9 @@ Answer:
 template = """
 You are an AI assistant whos goal will be to craft a balanced to-do list that will be achieveable within a 24 hour time window. 
 Based on the tasks given to you suggest a balanced to-do list that balances each activity effectively, taking into consideration any priorities or constraints given if applicable.
-Make sure to give timeslot assignments to each task. Assume that the day will start at 9am and end at 9pm.
-On this list only include tasks that were given only do not add any of your own nor any breaks.
-When you return back your schedule only give the schedule.
+Make sure to number every task in sequential order.
+On this list only include tasks that were given only.
+When you return back your list only give the list.
 
 Here is the conversational history: {context}
 
@@ -54,13 +54,14 @@ chain = prompt | model
 
 def handle_query():
     context = "" 
-    print("Welcome to the AI Agent! Type 'exit' to quit.")
+    print("Welcome to the AI Agent! I'm here to help you organize your tasks for today.")
     while True:
-        user_input = input("You: ")
+        user_input = input("Type 'exit' to quit.\nYou: ")
         if user_input.lower() == "exit":
             break
 
         result = chain.invoke({"context": context, "question": user_input})
+        print(result[0])
         print("Bot: ", result)
         context += f"\nUser: {user_input}\nAI: {result}" 
 
